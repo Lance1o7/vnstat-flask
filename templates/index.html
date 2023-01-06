@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.min.js"
+        integrity="sha512-EZhmSl/hiKyEHklogkakFnSYa5mWsLmTC4ZfvVzhqYNLPbXKAXsjUYRf2O9OlzQN33H0xBVfGSEIUeqt9astHQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        #container {
+            height: 9px;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1 class="mt-5">LAX</h1>
+        <p class="lead">本月已使用流量 {{ tx }} GB / 1000 GB</p>
+      </div>
+    </main>
+    <div class="container">
+        <div id="container"></div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+        <script>
+            var bar = new ProgressBar.Line(container, {
+              strokeWidth: 4,
+              easing: 'easeInOut',
+              duration: 1400,
+              color: '#FFEA82',
+              trailColor: '#eee',
+              trailWidth: 1,
+              svgStyle: {width: '100%', height: '100%'},
+              text: {
+                style: {
+                  // Text color.
+                  // Default: same as stroke color (options.color)
+                  color: '#999',
+                  position: 'absolute',
+                  right: '0',
+                  top: '30px',
+                  padding: 0,
+                  margin: 0,
+                  transform: null
+                },
+                autoStyleContainer: false
+              },
+              from: {color: '#FFEA82'},
+              to: {color: '#ED6A5A'},
+              step: (state, bar) => {
+                bar.setText(Math.round(bar.value() * 100) + ' %');
+              }
+            });
+
+            bar.animate({{ tx_p }});  // Number from 0.0 to 1.0
+        </script>
+    </div>
+
+</body>
+</html>
