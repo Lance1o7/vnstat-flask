@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    stats = os.popen("vnstat --oneline").read().split(',')
+    stats = os.popen("vnstat --oneline").read().split(';')
     tx = stats[9]
     return tx
 
